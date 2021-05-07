@@ -1,6 +1,6 @@
 "use strict";
 
-// Setting variables on page reload.
+// State Variables
 let randomNumber = Math.ceil(Math.random() * 20);
 let highscore = Number(document.querySelector(".highscore").textContent);
 
@@ -14,13 +14,23 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector(".message").textContent = "⛔ No Input!";
   } else {
     if (input > randomNumber) {
-      score--;
-      document.querySelector(".message").textContent = "📈 Too High!";
-      document.querySelector(".score").textContent = score;
+      if (score > 1) {
+        score--;
+        document.querySelector(".message").textContent = "📈 Too High!";
+        document.querySelector(".score").textContent = score;
+      } else {
+        document.querySelector(".message").textContent = "💥 You Lost the game";
+        document.querySelector(".score").textContent = 0;
+      }
     } else if (input < randomNumber) {
-      score--;
-      document.querySelector(".message").textContent = "📉 Too Low!";
-      document.querySelector(".score").textContent = score;
+      if (score > 1) {
+        score--;
+        document.querySelector(".message").textContent = "📉 Too Low!";
+        document.querySelector(".score").textContent = score;
+      } else {
+        document.querySelector(".message").textContent = "💥 You Lost the game";
+        document.querySelector(".score").textContent = 0;
+      }
     } else {
       document.body.style.backgroundColor = "#60b347";
       document.querySelector(".number").textContent = randomNumber;
@@ -38,6 +48,7 @@ document.querySelector(".again").addEventListener("click", function () {
   document.querySelector(".number").textContent = "?";
   document.querySelector(".score").textContent = "20";
   document.querySelector(".highscore").textContent = highscore;
+  document.querySelector(".message").textContent = "Start guessing...";
   document.querySelector(".guess").value = "";
   randomNumber = Math.ceil(Math.random() * 20);
 });
